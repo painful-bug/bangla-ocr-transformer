@@ -24,6 +24,7 @@ Let's have a look at the brief explanations of what this repository folder/files
 - **`main.py`** : The main driver code. You need to run this code in order to run the system. Details have been discussed in the upcoming section.
 - **`model.py`** : The model/architecture class in contained here. Currently, the model uses `ResNet-18` as backbone/feature extractor and for both image embeddings and ground truth embeddings, **Sine** positional encodings are used. If you wish to change them, visit this file.
 - **`preprocess.ipynb`** : This notebook is used to preprocess the data before training. This reads the raw data from **`raw_data`** directory and puts the preprocessed images inside **`data`** folder. Moreover, it splits the preprocessed data into **`Train`** and **`Validation`** split. Carefully go through the documentation inside to understand the functionalities and steps.
+- **`train_notebook.ipynb`** : This notebook provides an interactive way to train the model. It trains the model for 100 epochs using the preprocessed training and validation data from the **`data`** directory and saves the trained model as a `.pt` file in the repository root. This is an alternative to using `main.py train` and provides better visualization of training progress with loss plots.
 - **`services.py`** : This contains the `DataGenerator`, `Tokenizer` and `LabelSmoothing` classes.
     - **`DataGenerator`** creates data streaming from the `data` directory to the `DataLoader` during training and inference.
     - **`Tokenizer`** performs preprocessing the ground truths. The operations include text padding, generating numeric representation, creating and keeping records of vocabulary etc.
@@ -100,6 +101,14 @@ The split ratio can be defined in `preprocess.ipynb` file while creating the spl
 4. The preprocessed data will be populated inside `data` folder and split in `Train` and `Validation` sets.
 
 ### 2. Training a Model
+
+#### Option A: Using the Training Notebook (Recommended for Jupyter users)
+1. Clone this repository into your local machine using **`git clone git@github.com:ayan-cs/bangla-ocr-transformer`**. You can also download the `.zip` file and extract it.
+2. Install required dependencies: **`pip install numpy torch torchvision matplotlib pillow mlconfig editdistance`**
+3. Open and run **`train_notebook.ipynb`** in Jupyter Notebook or JupyterLab
+4. The notebook will train the model for 100 epochs and save it as a `.pt` file in the repository root. Training progress will be visualized with loss plots.
+
+#### Option B: Using the Command Line
 1. Clone this repository into your local machine using **`git clone git@github.com:ayan-cs/bangla-ocr-transformer`**. You can also download the `.zip` file and extract it.
 2. Make necessary changes in `train_config.yaml` file as per your choice/computing capacity.
 3. Run `main.py` using the following command : **`python main.py train`**
